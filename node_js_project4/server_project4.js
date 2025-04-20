@@ -92,23 +92,18 @@ app.post('/register' , (request , response) => {
             return response.status(500).json({message: 'internal server error'});
         }
         console.log(result);
-        // if(result.length > 0)
-        // {
-        //     response.json(
-        //         {
-        //             message: "register successful",
-        //             user: result[0]
-        //         }
-        //     )
-        // }
-        // else
-        // {
-        //     response.json(
-        //         {
-        //             message: "user not found",
-        //         }
-        //     )
-        // }
+        if(result.insertId)
+        {
+            return response.json({
+                message: "You have been registered"
+            })
+        }
+        else
+        {
+            return response.json({
+                message: "Unable to register, try again."
+            })
+        }
     })
 }) 
 
