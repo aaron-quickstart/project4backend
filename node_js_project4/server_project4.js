@@ -36,15 +36,15 @@ dataBase.connect(err => {
 //     response.send('Server is running running using Express!');
 // })
 
-// app.get('/getUsers' , (request, response)=> {
-//     dataBase.query('select * from users_tbl;' , (err , data) => {
-//         if(err)
-//         {
-//             throw err;
-//         }
-//         response.send(data);
-//     })
-// })
+app.get('/getUsers' , (request, response)=> {
+    dataBase.query('select * from users_tbl;' , (err , data) => {
+        if(err)
+        {
+            throw err;
+        }
+        response.send(data);
+    })
+})
 
 app.post('/login' , (request , response) => {
     const {user_name, user_password} = request.body;  // variable names of the form inputs from the log in
@@ -84,30 +84,31 @@ app.post('/register' , (request , response) => {
     console.log(user_name)
     console.log(user_password)
 
-    const sql = " select * from users_tbl where user_name = ? and user_password = ?";
+    const sql = " insert into users_tbl(user_name,user_password) values (? , ?)";
     dataBase.query(sql , [user_name , user_password] , (err ,result) => {
         if(err)
         {
             console.log(err);
             return response.status(500).json({message: 'internal server error'});
         }
-        if(result.length > 0)
-        {
-            response.json(
-                {
-                    message: "register successful",
-                    user: result[0]
-                }
-            )
-        }
-        else
-        {
-            response.json(
-                {
-                    message: "user not found",
-                }
-            )
-        }
+        console.log(result);
+        // if(result.length > 0)
+        // {
+        //     response.json(
+        //         {
+        //             message: "register successful",
+        //             user: result[0]
+        //         }
+        //     )
+        // }
+        // else
+        // {
+        //     response.json(
+        //         {
+        //             message: "user not found",
+        //         }
+        //     )
+        // }
     })
 }) 
 
