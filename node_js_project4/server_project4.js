@@ -31,10 +31,10 @@ dataBase.connect(err => {
     console.log('connection is complete');
 
 })
-// app.get('/getServerInfo' , (request , response) =>
-// {
-//     response.send('Server is running running using Express!');
-// })
+app.get('/getServerInfo' , (request , response) =>
+{
+    response.send('Server is running running using Express!');
+})
 
 app.get('/getUsers' , (request, response)=> {
     dataBase.query('select * from users_tbl;' , (err , data) => {
@@ -46,10 +46,9 @@ app.get('/getUsers' , (request, response)=> {
     })
 })
 
-app.post('/' , (request , response) => {
+app.post('/login' , (request , response) => {
     const {user_name, user_password} = request.body;  // variable names of the form inputs from the log in
-    console.log(user_name)
-    console.log(user_password)
+    console.log(user_name , user_password)
 
     const sql = " select * from users_tbl where user_name = ? and user_password = ?";
     dataBase.query(sql , [user_name , user_password] , (err ,result) => {
@@ -60,8 +59,9 @@ app.post('/' , (request , response) => {
         }
         if(result.length > 0)
         {
-            response.json(
+            return response.status(200).json(
                 {
+                    success: true,
                     message: "login successful",
                     user: result[0]
                 }
@@ -71,6 +71,7 @@ app.post('/' , (request , response) => {
         {
             response.json(
                 {
+                    success: false,
                     message: "user not found",
                 }
             )
