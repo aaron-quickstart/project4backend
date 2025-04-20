@@ -46,7 +46,7 @@ app.get('/getUsers' , (request, response)=> {
     })
 })
 
-app.post('/login' , (request , response) => {
+app.post('/' , (request , response) => {
     const {user_name, user_password} = request.body;  // variable names of the form inputs from the log in
     console.log(user_name)
     console.log(user_password)
