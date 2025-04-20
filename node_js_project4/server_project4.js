@@ -96,12 +96,14 @@ app.post('/register' , (request , response) => {
         if(result.insertId)
         {
             return response.json({
+                success: true,
                 message: "You have been registered"
             })
         }
         else
         {
             return response.json({
+                success: false,
                 message: "Unable to register, try again."
             })
         }
