@@ -102,7 +102,7 @@ app.post('/register' , (request , response) => {
         }
         else
         {
-            return response.json({
+            response.json({
                 success: false,
                 message: "Unable to register, try again."
             })
