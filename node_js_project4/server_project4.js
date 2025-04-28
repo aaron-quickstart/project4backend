@@ -17,10 +17,10 @@ const saltRounds = 10;
 
 const mysql = require('mysql2');
 const dataBase = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Abc120496!!',
-    database: 'project4app'
+    host: 'sql5.freesqldatabase.com',
+    user: 'sql5775832',
+    password: 'vnjQcQ5HzQ',
+    database: 'sql5775832'
 });
 
 dataBase.connect(err => {
